@@ -1,22 +1,22 @@
 body {
+  min-height: 100vh;
       margin: 0;
       font-family: Poppins;
       max-width: 100%;
+      background-image: url('LOGINBG.jpg'); 
+      background-size: auto 160%;
+      background-blend-mode: color;
+      animation: gradientBG 15s ease infinite;
      }
 
-    body::before{
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image: url('LOGINBG.jpg'); 
-        background-size: cover; 
-        background-position: center; 
-        opacity: 0.3; 
-        z-index: -999; 
+
+
+     @keyframes gradientBG {
+      0% {background-position: 0% 50%; }
+      50% {background-position: 100% 50%}
+      100% {background-position: 0% 50%}
      }
+
 .fullscreen {
   /*background-color: #212121;*/
   width: 100%;
@@ -37,6 +37,8 @@ body {
   height: max-content;
   text-align: center;
   color:#fff;
+  border-color: #fff ;
+  border-width: 2px;
  } 
 
  .bgcr img{
@@ -47,7 +49,11 @@ body {
 .bgcr {
   margin-top: 2%;
   gap: 10px;
-  background-color: #00509D;
+  background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 10 25px 45px rgba(0,0,0,0.4);
   height: max-content;
   width: max-content;
   padding: 0% 2% ;
@@ -57,6 +63,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: row;
+  
  } 
 
 .header{
@@ -106,15 +113,32 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #00509D;
     margin-top:7%;
+    background-color: rgba(255, 255, 255, 0.1);
     border-radius: 20px;
-    border-style: solid;
-    border-width: 2px;
-    border-color: white;
-    box-shadow: 5px 5px 20px rgba(0,0,0,0.7)
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 10 25px 45px rgba(0,0,0,0.4);
+    z-index: 9100;
+    overflow: hidden;
+ } 
+ 
+ .container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  transform: skewX(-15deg);
+  transition: 0.5s;
+  pointer-events: none;
+ }
 
- }   
+ .container:hover::before {
+  left: 120%;  
+ }
+ 
  .container img {
     position: absolute;
     top: -30%;
@@ -126,11 +150,11 @@ body {
     border-style: solid;
     border-width: 2px;
     border-color: white;
-    z-index: 500;
+    z-index: 7500;
   }
 
   form {
-  margin-top: 15% ;
+  margin-top: 5%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -242,7 +266,7 @@ label {
     display: flex;
     align-items: center;
     gap: 4px;
-    padding: 10px 24px;
+    padding: 8px 24px;
     border: 4px solid;
     border-color: transparent;
     font-size: 14px;
