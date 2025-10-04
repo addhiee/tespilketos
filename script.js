@@ -7,9 +7,9 @@ window.addEventListener("load", function() {
 // Daftar token & nama (sementara hardcode di JS)
 const daftarPemilih = {
   "bsaiuU7c": "Ahmad Affandi",
-  "tokenuji1": "Budi Santoso",
-  "tokenuji2": "Citra Lestari",
-  "tokenuji3": "Dewi Rahmawati"
+  "tokencb1": "Budi Santoso",
+  "tokencb2": "Citra Lestari",
+  "tokencb3": "Dewi Rahmawati"
   // tinggal tambah lagi sesuai daftar
 };
 
@@ -216,4 +216,5 @@ window.onload = function () {
     }
   }, 1000); 
 };
+
 
