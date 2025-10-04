@@ -3,6 +3,8 @@ window.addEventListener("load", function() {
 });
 
 // ===== LOGIN PAGE =====
+
+// Token, nama, dan kelas
 const daftarPemilih = {
   "bsaiuU7c": { nama: "Ahmad Affandi", kelas: "XI IPA 1" },
   "tokencb1": { nama: "Budi Santoso", kelas: "XI IPA 2" },
@@ -18,6 +20,7 @@ function login() {
   const token = document.getElementById("token").value.trim();
 
   if (token === "") {
+    // Popup token kosong
     document.getElementById("popupkosong").classList.add("active");
     setTimeout(() => document.getElementById("kosong").classList.add("active"), 50);
     setTimeout(() => document.getElementById("kosong").classList.remove("active"), 1500);
@@ -25,6 +28,7 @@ function login() {
     return;
   }
 
+  // Jika token valid
   if (daftarPemilih[token]) {
     localStorage.setItem("token", token);
     localStorage.setItem("nama", daftarPemilih[token].nama);
@@ -34,6 +38,7 @@ function login() {
     setTimeout(() => document.getElementById("berhasil").classList.add("active"), 50);
     setTimeout(() => window.location.href = "kandidat.html", 1500);
   } else {
+    // Jika token salah
     document.getElementById("popupgagal").classList.add("active");
     setTimeout(() => document.getElementById("gagal").classList.add("active"), 50);
     setTimeout(() => document.getElementById("gagal").classList.remove("active"), 1500);
@@ -105,16 +110,19 @@ function kirimVote(kandidat, redirectPage) {
     return;
   }
 
+  // Kirim data tanpa menunggu respon
   fetch("https://databasepilketos.vercel.app/api/proxy", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ token, nama, kelas, kandidat })
   }).catch(() => console.error("Gagal mengirim suara ke server"));
 
+  // Hapus data login agar tidak bisa balik lagi
   localStorage.removeItem("token");
   localStorage.removeItem("nama");
   localStorage.removeItem("kelas");
 
+  // Redirect langsung
   window.location.href = redirectPage;
 }
 
@@ -126,15 +134,14 @@ function back() { window.location.href = "kandidat.html"; }
 function awal() { window.location.href = "index.html"; }
 
 // ===== DONE PAGE =====
-window.onload = function() {
-  let count = 5;
+window.onload = function () {
   const countdownElement = document.getElementById("countdown");
-  if (!countdownElement) return;
+  if (!countdownElement) return; // biar gak error di halaman lain
 
+  let count = 5;
   const timer = setInterval(() => {
     count--;
     countdownElement.textContent = count;
-
     if (count <= 0) {
       clearInterval(timer);
       window.location.href = "index.html";
