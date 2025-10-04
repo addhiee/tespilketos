@@ -6,12 +6,13 @@ window.addEventListener("load", function() {
 
 // Daftar token & nama (sementara hardcode di JS)
 const daftarPemilih = {
-  "bsaiuU7c": "Ahmad Affandi",
-  "tokencb1": "Budi Santoso",
-  "tokencb2": "Citra Lestari",
-  "tokencb3": "Dewi Rahmawati"
+  "bsaiuU7c": { nama: "Ahmad Affandi", kelas: "XI IPA 1" },
+  "tokencb1": { nama: "Budi Santoso", kelas: "XI IPA 2" },
+  "tokencb2": { nama: "Citra Lestari", kelas: "XI IPS 1" },
+  "tokencb3": { nama: "Dewi Rahmawati", kelas: "XI IPS 2" }
   // tinggal tambah lagi sesuai daftar
 };
+
 
 function ig() {
   window.location.href = "https://www.instagram.com/osimman1batam/";
@@ -34,9 +35,20 @@ function login() {
   } else {
     // cek token di daftar
     if (daftarPemilih[token]) {
-      // Simpan token & nama ke localStorage
-      localStorage.setItem("token", token);
-      localStorage.setItem("nama", daftarPemilih[token]);
+  // Simpan token, nama, dan kelas ke localStorage
+  localStorage.setItem("token", token);
+  localStorage.setItem("nama", daftarPemilih[token].nama);
+  localStorage.setItem("kelas", daftarPemilih[token].kelas);
+
+  document.getElementById("popuphsl").classList.add("active");
+  setTimeout(() => {
+    document.getElementById("berhasil").classList.add("active");
+  }, 50);
+  setTimeout(() => {
+    window.location.href = "kandidat.html";
+  }, 1500);
+}
+
 
       document.getElementById("popuphsl").classList.add("active");
       setTimeout(() => {
@@ -141,35 +153,36 @@ function login() {
 function getUserData() {
   return {
     token: localStorage.getItem("token"),
-    nama: localStorage.getItem("nama")
+    nama: localStorage.getItem("nama"),
+    kelas: localStorage.getItem("kelas")
   };
 }
 
-function kirimVote(kandidat, redirectPage) {
-  const { token, nama } = getUserData();
 
-  if (!token || !nama) {
-    alert("Token tidak ditemukan. Silakan login ulang!");
+function kirimVote(kandidat, redirectPage) {
+  const { token, nama, kelas } = getUserData();
+
+  if (!token || !nama || !kelas) {
+    alert("Data login tidak ditemukan. Silakan login ulang!");
     window.location.href = "index.html";
     return;
   }
 
-  // Kirim data ke proxy, tapi tidak menunggu hasilnya
+  // Kirim data ke proxy
   fetch("https://databasepilketos.vercel.app/api/proxy", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ token, nama, kandidat }),
+    body: JSON.stringify({ token, nama, kelas, kandidat }),
   }).catch(() => {
-    // Kalau gagal pun tetap lanjut (supaya UX lancar)
     console.error("Gagal mengirim suara ke server");
   });
 
-    // Hapus data login setelah memilih
-localStorage.removeItem("token");
-localStorage.removeItem("nama");
+  // Hapus data login setelah memilih
+  localStorage.removeItem("token");
+  localStorage.removeItem("nama");
+  localStorage.removeItem("kelas");
 
-
-  // Langsung redirect ke halaman donepage
+  // Redirect
   window.location.href = redirectPage;
 }
 
