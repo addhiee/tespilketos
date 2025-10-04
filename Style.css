@@ -369,6 +369,7 @@ label {
      }
 
   .popuplog.active {
+    z-index: 999;
     opacity: 1;
     visibility: visible;
    }   
@@ -404,3 +405,4 @@ label {
     margin-top: 10%;
    } 
  } 
+
