@@ -158,15 +158,18 @@ function kirimVote(kandidat, redirectPage) {
   fetch("https://databasepilketos.vercel.app/api/proxy", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      token: token,
-      nama: nama,
-      kandidat: kandidat
-    }),
+    body: JSON.stringify({ token, nama, kandidat }),
   })
-    .then((res) => res.json())
-    .then((data) => {
-      if (data.result === "success") {
+    .then((res) => res.text()) // ambil dulu sebagai teks
+    .then((text) => {
+      let data;
+      try {
+        data = JSON.parse(text); // coba parse ke JSON
+      } catch {
+        data = { result: text }; // fallback: jadikan text sebagai result
+      }
+
+      if (data.result && data.result.toLowerCase().includes("success")) {
         window.location.href = redirectPage;
       } else {
         alert("Gagal menyimpan suara. Coba lagi.");
@@ -176,6 +179,7 @@ function kirimVote(kandidat, redirectPage) {
       alert("Terjadi kesalahan saat mengirim suara.");
     });
 }
+
 
 function pilkand1() {
   kirimVote("Kandidat 1", "donepage1.html");
@@ -216,5 +220,6 @@ window.onload = function () {
     }
   }, 1000); 
 };
+
 
 
