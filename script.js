@@ -66,7 +66,21 @@ function login() {
 
 // KANDIDAT PAGE    
 
+function getUserData() {
+  return {
+    token: localStorage.getItem("token"),
+    nama: localStorage.getItem("nama")
+  };
+}
 
+function kirimVote(kandidat, redirectPage) {
+  const { token, nama } = getUserData();
+
+  if (!token || !nama) {
+    alert("Token tidak ditemukan. Silakan login ulang!");
+    window.location.href = "index.html";
+    return;
+  }
 
     function kandidat1() {
     document.getElementById("popup1").classList.add("active");
@@ -208,6 +222,7 @@ window.onload = function () {
     }
   }, 1000); 
 };
+
 
 
 
