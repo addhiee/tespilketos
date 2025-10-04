@@ -14,6 +14,14 @@
 
 
 <body>
+  <script>
+  // Cek apakah user sudah login
+  if (!localStorage.getItem("token") || !localStorage.getItem("nama")) {
+    // Kalau belum login, paksa ke index
+    window.location.href = "index.html";
+  }
+</script>
+
 <div class="fullscreen">
 
     <div class="header"> 
@@ -56,3 +64,4 @@
 </div>
     <script src="script.js"></script>
 </body>   
+
