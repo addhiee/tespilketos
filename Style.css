@@ -350,7 +350,8 @@ label {
   }
 
 .popuplog {
-
+  background-color: rgba(0,0,0,0.6);
+  backdrop-filter: none;
   width: 100%;
   height: 100%;
   top: 0;
@@ -405,4 +406,5 @@ label {
     margin-top: 10%;
    } 
  } 
+
 
