@@ -1,155 +1,93 @@
 window.addEventListener("load", function() {
-    document.body.classList.add("loaded");
-  });
+  document.body.classList.add("loaded");
+});
 
-// LOGIN PAGE 
-
-// Daftar token & nama (sementara hardcode di JS)
+// ===== LOGIN PAGE =====
 const daftarPemilih = {
   "bsaiuU7c": { nama: "Ahmad Affandi", kelas: "XI IPA 1" },
   "tokencb1": { nama: "Budi Santoso", kelas: "XI IPA 2" },
   "tokencb2": { nama: "Citra Lestari", kelas: "XI IPS 1" },
   "tokencb3": { nama: "Dewi Rahmawati", kelas: "XI IPS 2" }
-  // tinggal tambah lagi sesuai daftar
 };
-
 
 function ig() {
   window.location.href = "https://www.instagram.com/osimman1batam/";
- }
- 
+}
+
 function login() {
-  const token = document.getElementById("token").value;
+  const token = document.getElementById("token").value.trim();
 
-  if (token.trim() === "") {
+  if (token === "") {
     document.getElementById("popupkosong").classList.add("active");
-    setTimeout(() => {
-      document.getElementById("kosong").classList.add("active");
-    }, 50);
-    setTimeout(() => {
-      document.getElementById("kosong").classList.remove("active");
-    }, 1500);
-    setTimeout(() => {
-      document.getElementById("popupkosong").classList.remove("active");
-    }, 1600);
+    setTimeout(() => document.getElementById("kosong").classList.add("active"), 50);
+    setTimeout(() => document.getElementById("kosong").classList.remove("active"), 1500);
+    setTimeout(() => document.getElementById("popupkosong").classList.remove("active"), 1600);
+    return;
+  }
+
+  if (daftarPemilih[token]) {
+    localStorage.setItem("token", token);
+    localStorage.setItem("nama", daftarPemilih[token].nama);
+    localStorage.setItem("kelas", daftarPemilih[token].kelas);
+
+    document.getElementById("popuphsl").classList.add("active");
+    setTimeout(() => document.getElementById("berhasil").classList.add("active"), 50);
+    setTimeout(() => window.location.href = "kandidat.html", 1500);
   } else {
-    // cek token di daftar
-    if (daftarPemilih[token]) {
-  // Simpan token, nama, dan kelas ke localStorage
-  localStorage.setItem("token", token);
-  localStorage.setItem("nama", daftarPemilih[token].nama);
-  localStorage.setItem("kelas", daftarPemilih[token].kelas);
-
-  document.getElementById("popuphsl").classList.add("active");
-  setTimeout(() => {
-    document.getElementById("berhasil").classList.add("active");
-  }, 50);
-  setTimeout(() => {
-    window.location.href = "kandidat.html";
-  }, 1500);
-}
-
-
-      document.getElementById("popuphsl").classList.add("active");
-      setTimeout(() => {
-        document.getElementById("berhasil").classList.add("active");
-      }, 50);
-      setTimeout(() => {
-        window.location.href = "kandidat.html";
-      }, 1500);
-    } else {
-      document.getElementById("popupgagal").classList.add("active");
-      setTimeout(() => {
-        document.getElementById("gagal").classList.add("active");
-      }, 50);
-      setTimeout(() => {
-        document.getElementById("gagal").classList.remove("active");
-      }, 1500);
-      setTimeout(() => {
-        document.getElementById("popupgagal").classList.remove("active");
-      }, 1600);
-    }
+    document.getElementById("popupgagal").classList.add("active");
+    setTimeout(() => document.getElementById("gagal").classList.add("active"), 50);
+    setTimeout(() => document.getElementById("gagal").classList.remove("active"), 1500);
+    setTimeout(() => document.getElementById("popupgagal").classList.remove("active"), 1600);
   }
 }
 
+// ===== KANDIDAT PAGE =====
+function kandidat1() {
+  document.getElementById("popup1").classList.add("active");
+  setTimeout(() => document.getElementById("kand1").classList.add("active"), 50);
+}
 
-
-
-
-// KANDIDAT PAGE    
-
-
-    function kandidat1() {
-    document.getElementById("popup1").classList.add("active");
-    setTimeout (() => {
-      document.getElementById("kand1").classList.add("active");
-    },50);      
-
-  }
-
-  function closePopup1() {
+function closePopup1() {
   document.getElementById("kand1").classList.remove("active");
-  setTimeout(() => {
-    document.getElementById("popup1").classList.remove("active");
-  }, 500);
+  setTimeout(() => document.getElementById("popup1").classList.remove("active"), 500);
 }
 
-    function pilihKand1() {
+function pilihKand1() {
   closePopup1();
-  setTimeout (() => {
-    window.location.href = "fixpage1.html";  
-   }, 1000);    
+  setTimeout(() => window.location.href = "fixpage1.html", 1000);
 }
 
-    function kandidat2() {
-    document.getElementById("popup2").classList.add("active");
-    setTimeout (() => {
-      document.getElementById("kand2").classList.add("active");
-    },50);      
+function kandidat2() {
+  document.getElementById("popup2").classList.add("active");
+  setTimeout(() => document.getElementById("kand2").classList.add("active"), 50);
+}
 
-  }
-
-  function closePopup2() {
+function closePopup2() {
   document.getElementById("kand2").classList.remove("active");
-  setTimeout(() => {
-    document.getElementById("popup2").classList.remove("active");
-  }, 500);
+  setTimeout(() => document.getElementById("popup2").classList.remove("active"), 500);
 }
 
-    function pilihKand2() {
+function pilihKand2() {
   closePopup2();
-  setTimeout (() => {
-    window.location.href = "fixpage2.html";  
-   }, 1000); 
+  setTimeout(() => window.location.href = "fixpage2.html", 1000);
 }
 
+function kandidat3() {
+  document.getElementById("popup3").classList.add("active");
+  setTimeout(() => document.getElementById("kand3").classList.add("active"), 50);
+}
 
-    function kandidat3() {
-    document.getElementById("popup3").classList.add("active");
-    setTimeout (() => {
-      document.getElementById("kand3").classList.add("active");
-    },50);      
-
-  }
-
-  function closePopup3() {
+function closePopup3() {
   document.getElementById("kand3").classList.remove("active");
-  setTimeout(() => {
-    document.getElementById("popup3").classList.remove("active");
-  }, 500);
+  setTimeout(() => document.getElementById("popup3").classList.remove("active"), 500);
 }
 
-    function pilihKand3() {
+function pilihKand3() {
   closePopup3();
-  setTimeout (() => {
-    window.location.href = "fixpage3.html";  
-   }, 1000);
+  setTimeout(() => window.location.href = "fixpage3.html", 1000);
 }
-
-//FIX PAGE
 
 // ===== FIX PAGE =====
-
 function getUserData() {
   return {
     token: localStorage.getItem("token"),
@@ -157,7 +95,6 @@ function getUserData() {
     kelas: localStorage.getItem("kelas")
   };
 }
-
 
 function kirimVote(kandidat, redirectPage) {
   const { token, nama, kelas } = getUserData();
@@ -168,67 +105,39 @@ function kirimVote(kandidat, redirectPage) {
     return;
   }
 
-  // Kirim data ke proxy
   fetch("https://databasepilketos.vercel.app/api/proxy", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ token, nama, kelas, kandidat }),
-  }).catch(() => {
-    console.error("Gagal mengirim suara ke server");
-  });
+    body: JSON.stringify({ token, nama, kelas, kandidat })
+  }).catch(() => console.error("Gagal mengirim suara ke server"));
 
-  // Hapus data login setelah memilih
   localStorage.removeItem("token");
   localStorage.removeItem("nama");
   localStorage.removeItem("kelas");
 
-  // Redirect
   window.location.href = redirectPage;
 }
 
-function pilkand1() {
-  kirimVote("Kandidat 1", "donepage1.html");
-}
+function pilkand1() { kirimVote("Kandidat 1", "donepage1.html"); }
+function pilkand2() { kirimVote("Kandidat 2", "donepage2.html"); }
+function pilkand3() { kirimVote("Kandidat 3", "donepage3.html"); }
 
-function pilkand2() {
-  kirimVote("Kandidat 2", "donepage2.html");
-}
+function back() { window.location.href = "kandidat.html"; }
+function awal() { window.location.href = "index.html"; }
 
-function pilkand3() {
-  kirimVote("Kandidat 3", "donepage3.html");
-}
+// ===== DONE PAGE =====
+window.onload = function() {
+  let count = 5;
+  const countdownElement = document.getElementById("countdown");
+  if (!countdownElement) return;
 
-function back() {
-  window.location.href = "kandidat.html";
-}
-
-function awal() {
-  window.location.href = "index.html";
-}
-
-
-
-      // DONEPAGE
-      
-window.onload = function () {
-  let count = 5; 
-  let countdownElement = document.getElementById("countdown");
-
-  let timer = setInterval(function () {
+  const timer = setInterval(() => {
     count--;
     countdownElement.textContent = count;
 
     if (count <= 0) {
       clearInterval(timer);
-      //window.location.href = "#";
-      window.location.href = "index.html"; 
+      window.location.href = "index.html";
     }
-  }, 1000); 
+  }, 1000);
 };
-
-
-
-
-
-
-
