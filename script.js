@@ -164,6 +164,11 @@ function kirimVote(kandidat, redirectPage) {
     console.error("Gagal mengirim suara ke server");
   });
 
+    // Hapus data login setelah memilih
+localStorage.removeItem("token");
+localStorage.removeItem("nama");
+
+
   // Langsung redirect ke halaman donepage
   window.location.href = redirectPage;
 }
@@ -207,6 +212,7 @@ window.onload = function () {
     }
   }, 1000); 
 };
+
 
 
 
