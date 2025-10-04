@@ -365,7 +365,7 @@ label {
   backdrop-filter: none !important;
 
   /* pastikan di atas semua elemen */
-  z-index: 99999 !important;
+  z-index: 99999 ;
 
   opacity: 0;
   visibility: hidden;
@@ -409,6 +409,7 @@ label {
     margin-top: 10%;
    } 
  } 
+
 
 
 
