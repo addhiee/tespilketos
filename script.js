@@ -155,7 +155,7 @@ function kirimVote(kandidat, redirectPage) {
     return;
   }
 
-  fetch("https://databasepilketos.vercel.app/", {
+  fetch("https://databasepilketos.vercel.app/api/proxy", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -216,3 +216,4 @@ window.onload = function () {
     }
   }, 1000); 
 };
+
