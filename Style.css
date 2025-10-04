@@ -350,52 +350,55 @@ label {
   }
 
 .popuplog {
-  background-color: rgba(0,0,0,0.6);
-  backdrop-filter: none;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
-  z-index: 993;
+  position: fixed;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  position: fixed;
-  background-color: #0000009e;
+
+  /* overlay solid hitam, tanpa blur */
+  background-color: rgba(0, 0, 0, 0.8); 
+  backdrop-filter: none !important;
+
+  /* pastikan di atas semua elemen */
+  z-index: 99999 !important;
 
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out
-     }
+  transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
+}
 
-  .popuplog.active {
-    z-index: 999;
-    opacity: 1;
-    visibility: visible;
-   }   
+.popuplog.active {
+  opacity: 1;
+  visibility: visible;
+}
 
-    .popuplogin {
-    width: 30vw;
-    height: 50px;
-    z-index: 999;
-    background-color: rgb(255, 255, 255);
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 25px 30px;
-    box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.062);
+.popuplogin {
+  width: 30vw;
+  min-width: 250px;
+  height: auto;
+  padding: 25px 30px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 100000 !important; /* lebih tinggi dari overlay */
   transform: scale(0.1);
   transition: transform 0.3s ease-in-out;
-
 }
 
 .popuplogin.active {
-    transform: scale(1);
+  transform: scale(1);
 }
+
 
 .phsl {
   text-align: center;
@@ -406,5 +409,6 @@ label {
     margin-top: 10%;
    } 
  } 
+
 
 
